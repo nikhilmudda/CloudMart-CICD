@@ -1,0 +1,18 @@
+{
+  "name": "cloudmart",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CloudMart demo storefront and lightweight operations dashboard for a DevOps CI/CD project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

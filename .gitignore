@@ -1,0 +1,39 @@
+# Terraform local data and state
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+crash.*.log
+terraform.tfvars
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+**/tfplan
+
+# Application secrets and dependencies
+**/node_modules/
+.env
+.env.*
+!.env.example
+coverage/
+
+# Private keys and credentials
+*.pem
+*.key
+*.p12
+*.pfx
+.aws/
+credentials
+config
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+**/tfplan

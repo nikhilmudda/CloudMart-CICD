@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8fa">
+  <meta name="description" content="CloudMart — thoughtful everyday essentials, with a tiny operations dashboard.">
+  <title>CloudMart — Everyday, considered.</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="CloudMart home"><span class="brand-mark">c</span><span>cloudmart<span class="brand-dot">.</span></span></a>
+    <nav class="top-nav" aria-label="Main navigation">
+      <a class="nav-link active" href="#shop">Shop</a>
+      <a class="nav-link" href="#operations">Operations</a>
+    </nav>
+    <button class="cart-button" id="cart-toggle" aria-label="Open shopping cart">Bag <span id="cart-count">0</span></button>
+  </header>
+
+  <main>
+    <section class="hero" id="shop">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span> A little less, a little better</p>
+        <h1>Everyday things.<br><span>Thoughtfully chosen.</span></h1>
+        <p class="hero-description">Useful objects for work, home, and everywhere in between. A small collection made for everyday rituals.</p>
+        <a class="primary-button" href="#products">Explore the collection <span aria-hidden="true">↘</span></a>
+        <div class="hero-meta"><span>06 curated essentials</span><span>·</span><span>Made for daily life</span></div>
+      </div>
+      <div class="hero-art" aria-label="Illustration of everyday products">
+        <div class="art-circle circle-one"></div><div class="art-circle circle-two"></div>
+        <div class="art-label label-top">THE DAILY EDIT<br><strong>№ 01 / 06</strong></div>
+        <div class="product-shape tote-shape"><span class="tote-handle"></span><span class="shape-logo">cm.</span></div>
+        <div class="product-shape bottle-shape"><span class="bottle-cap"></span><span class="bottle-line"></span></div>
+        <div class="product-shape notebook-shape"><span class="notebook-line"></span><span class="notebook-line"></span><span class="notebook-line"></span></div>
+        <div class="art-label label-bottom">OBJECTS WITH PURPOSE <span>✳</span></div>
+      </div>
+    </section>
+
+    <section class="collection section-wrap" id="products">
+      <div class="section-heading">
+        <div><p class="eyebrow">THE COLLECTION</p><h2>Good things, daily.</h2></div>
+        <p class="section-note">Simple essentials. No unnecessary fuss.</p>
+      </div>
+      <div class="filter-row" id="filters" aria-label="Filter products">
+        <button class="filter-chip selected" data-filter="All">All items</button>
+        <button class="filter-chip" data-filter="Accessories">Accessories</button>
+        <button class="filter-chip" data-filter="Lifestyle">Lifestyle</button>
+        <button class="filter-chip" data-filter="Workspace">Workspace</button>
+        <button class="filter-chip" data-filter="Apparel">Apparel</button>
+        <button class="filter-chip" data-filter="Stationery">Stationery</button>
+        <button class="filter-chip" data-filter="Electronics">Electronics</button>
+      </div>
+      <div class="product-grid" id="product-grid" aria-live="polite"><div class="loading-state">Loading the collection…</div></div>
+    </section>
+
+    <section class="ops-section" id="operations">
+      <div class="section-wrap">
+        <div class="section-heading ops-heading">
+          <div><p class="eyebrow">BEHIND THE STORE</p><h2>A small ops window.</h2></div>
+          <p class="section-note">A lightweight view of the service powering CloudMart.</p>
+        </div>
+        <div class="ops-grid">
+          <article class="ops-card ops-status">
+            <div class="ops-card-head"><span class="ops-icon">↗</span><span class="live-pill"><span class="status-dot"></span> LIVE CHECK</span></div>
+            <p class="ops-label">SERVICE STATUS</p><h3 id="service-status">Checking…</h3><p class="muted" id="service-message">Waiting for health endpoint</p>
+          </article>
+          <article class="ops-card">
+            <div class="ops-card-head"><span class="ops-icon">⌘</span><span class="muted">RUNTIME</span></div>
+            <p class="ops-label">APPLICATION VERSION</p><h3 id="app-version">—</h3><p class="muted" id="app-environment">Environment —</p>
+          </article>
+          <article class="ops-card">
+            <div class="ops-card-head"><span class="ops-icon">◷</span><span class="muted">PROCESS</span></div>
+            <p class="ops-label">PROCESS UPTIME</p><h3 id="app-uptime">—</h3><p class="muted" id="node-version">Node —</p>
+          </article>
+        </div>
+        <div class="ops-footer"><span><span class="status-dot"></span> Health endpoint: <code>/api/health</code></span><span id="last-checked">Last checked —</span></div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Shopping cart" aria-hidden="true">
+    <div class="drawer-head"><div><p class="eyebrow">YOUR SELECTION</p><h2>Your bag <span id="drawer-count">(0)</span></h2></div><button class="icon-button" id="cart-close" aria-label="Close cart">×</button></div>
+    <div class="cart-items" id="cart-items"><p class="empty-cart">Your bag is taking a little breather.</p></div>
+    <div class="cart-summary"><div><span>Subtotal</span><strong id="cart-total">$0.00</strong></div><button class="primary-button checkout-button" id="checkout-button">Continue <span>→</span></button><p class="tiny-note">Demo storefront · checkout is not connected</p></div>
+  </aside>
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <footer class="site-footer"><a class="brand footer-brand" href="#"><span class="brand-mark">c</span><span>cloudmart<span class="brand-dot">.</span></span></a><span>Built for the everyday. Delivered by code.</span><span>CloudMart CICD · Demo project</span></footer>
+  <script src="/app.js" defer></script>
+</body>
+</html>
