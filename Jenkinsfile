@@ -84,6 +84,43 @@ pipeline {
                 '''
             }
         }
+        stage('Container Smoke Test') {
+            steps {
+                sh '''
+                    set -eu
+
+                    CONTAINER_NAME="cloudmart-smoke-${BUILD_NUMBER}"
+                    IMAGE="cloudmart:${BUILD_NUMBER}-${GIT_SHORT}"
+
+                    cleanup() {
+                        docker rm -f "$CONTAINER_NAME" >/dev/null 2>&1 || true
+                    }
+
+                    trap cleanup EXIT
+
+                    docker run -d \
+                      --name "$CONTAINER_NAME" \
+                      -p 127.0.0.1:3001:3000 \
+                      "$IMAGE"
+
+                    attempt=0
+                    until curl -fsS http://127.0.0.1:3001/api/health; do
+                        attempt=$((attempt + 1))
+                        if [ "$attempt" -ge 15 ]; then
+                            echo "Health check failed."
+                            docker logs "$CONTAINER_NAME"
+                            exit 1
+                        fi
+                        sleep 2
+                    done
+
+                    curl -fsS http://127.0.0.1:3001/api/ready
+                    curl -fsS http://127.0.0.1:3001/api/products
+
+                    echo "Container smoke tests passed."
+                '''
+            }
+        }
 
         stage('Verify AWS Identity') {
             steps {
