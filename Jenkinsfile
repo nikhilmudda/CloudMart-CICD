@@ -95,22 +95,26 @@ pipeline {
             }
         }
 
+
         stage('Archive Build Metadata to S3') {
             steps {
                 sh '''
+                    set -eu
                     mkdir -p build-output
 
                     cat > build-output/build-metadata.json <<EOF
-                    {
-                      "project": "CloudMart-CICD",
-                      "buildNumber": "${BUILD_NUMBER}",
-                      "gitCommit": "${GIT_COMMIT}",
-                      "gitShort": "${GIT_SHORT}",
-                      "image": "${ECR_REGISTRY}/${ECR_REPOSITORY}:${BUILD_NUMBER}-${GIT_SHORT}",
-                      "region": "${AWS_REGION}",
-                      "status": "SUCCESS"
-                    }
-                    EOF
+{
+  "project": "CloudMart-CICD",
+  "buildNumber": "${BUILD_NUMBER}",
+  "gitCommit": "${GIT_COMMIT}",
+  "gitShort": "${GIT_SHORT}",
+  "image": "${ECR_REGISTRY}/${ECR_REPOSITORY}:${BUILD_NUMBER}-${GIT_SHORT}",
+  "region": "${AWS_REGION}",
+  "status": "SUCCESS"
+}
+EOF
+
+                    cat build-output/build-metadata.json
 
                     aws s3 cp build-output/build-metadata.json \
                       "s3://${S3_BUCKET}/builds/${BUILD_NUMBER}/build-metadata.json" \
@@ -118,13 +122,4 @@ pipeline {
                 '''
             }
         }
-    }
-
-    post {
-        always {
-            sh 'docker logout "$ECR_REGISTRY" || true'
-            archiveArtifacts artifacts: 'build-output/*.json', allowEmptyArchive: true
-            deleteDir()
-        }
-    }
 }
