@@ -54,7 +54,7 @@ app.use("/api", (_req, res) => {
 });
 
 app.get("*", (_req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.status(404).send("Page not found");
 });
 
 app.use((err, _req, res, _next) => {
@@ -62,6 +62,10 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ error: "Internal server error" });
 });
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`CloudMart listening on port ${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`CloudMart listening on port ${PORT}`);
+  });
+}
+
+module.exports = app;

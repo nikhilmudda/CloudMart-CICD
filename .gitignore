@@ -37,3 +37,11 @@ Thumbs.db
 .idea/
 *.swp
 **/tfplan
+
+#miscaelenous
+/terraform/
+/terraform-backup-phase1/
+
+# Archived Terraform configurations - do not commit
+/terraform/
+/terraform-backup-phase1/
